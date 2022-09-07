@@ -23,6 +23,7 @@ import * as React from 'react';
 import useModal from '../../hooks/useModal';
 import Button from '../../ui/Button';
 import {INSERT_FIGMA_COMMAND} from '../FigmaPlugin';
+import {INSERT_OEMBED_COMMAND} from '../OEmbedPlugin';
 import {INSERT_TWEET_COMMAND} from '../TwitterPlugin';
 import {INSERT_YOUTUBE_COMMAND} from '../YouTubePlugin';
 
@@ -145,10 +146,42 @@ export const FigmaEmbedConfig: PlaygroundEmbedConfig = {
   type: 'figma',
 };
 
+export const OEmbedEmbedConfig: PlaygroundEmbedConfig = {
+  contentName: 'OEmbed',
+
+  exampleUrl:
+    'https://publish.twitter.com/oembed?url=https://twitter.com/TwitterDev',
+
+  icon: <i className="icon embed" />,
+
+  insertNode: (editor: LexicalEditor, result: EmbedMatchResult) => {
+    editor.dispatchCommand(INSERT_OEMBED_COMMAND, result.url);
+  },
+
+  keywords: ['oembed', 'mock-up'],
+
+  // Determine if a given URL is a match and return url data.
+  parseUrl: (text: string) => {
+    const match = /https?:\/\/[\w!?/+\-_~;.,*&@#$%()'[\]]+/.exec(text);
+
+    if (match != null) {
+      return {
+        id: '',
+        url: text,
+      };
+    }
+
+    return null;
+  },
+
+  type: 'figma',
+};
+
 export const EmbedConfigs = [
   TwitterEmbedConfig,
   YoutubeEmbedConfig,
   FigmaEmbedConfig,
+  OEmbedEmbedConfig,
 ];
 
 function AutoEmbedMenuItem({

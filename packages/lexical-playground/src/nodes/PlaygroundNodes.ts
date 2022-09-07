@@ -26,6 +26,7 @@ import {FigmaNode} from './FigmaNode';
 import {ImageNode} from './ImageNode';
 import {KeywordNode} from './KeywordNode';
 import {MentionNode} from './MentionNode';
+import {OEmbedNode} from './OEmbedNode';
 import {PollNode} from './PollNode';
 import {StickyNode} from './StickyNode';
 import {TableNode as NewTableNode} from './TableNode';
@@ -60,6 +61,7 @@ const PlaygroundNodes: Array<Klass<LexicalNode>> = [
   KeywordNode,
   HorizontalRuleNode,
   TweetNode,
+  OEmbedNode,
   YouTubeNode,
   FigmaNode,
   MarkNode,
